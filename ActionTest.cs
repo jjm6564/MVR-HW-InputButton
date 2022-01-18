@@ -9,6 +9,10 @@ public class ActionTest : MonoBehaviour
     public SteamVR_Action_Boolean menu;
     public SteamVR_Action_Boolean grab;
     public GameObject canvas;
+    private GameObject istCanvas;
+    
+    public GameObject HMD;
+    public GameObject cube;
 
     public bool GetMenu(){
         return menu.GetState(handType);
@@ -20,27 +24,29 @@ public class ActionTest : MonoBehaviour
     void Awake()
     {
         //Instantiate (canvas,new Vector3(0,0,3),Quaternion.Euler(-90f,0f,0f));
-        Instantiate(canvas,new Vector3(0,0,2),canvas.transform.rotation);
+        //Instantiate(canvas,new Vector3(0,0,2),canvas.transform.rotation).transform.parent = HMD.transform;
+      istCanvas = Instantiate(canvas,canvas.transform.localPosition,canvas.transform.rotation);
+      istCanvas.transform.parent = HMD.transform;
+      //Instantiate(canvas,canvas.transform.localPosition,canvas.transform.rotation).transform.parent = HMD.transform;
 
     }
     void Start()
     {
-        canvas.SetActive(true);
-
+        istCanvas.SetActive(false);
+        cube.SetActive(false);
     }
     void Update()
     {
         if(GetMenu()){
-            print("ok"+handType);
+            istCanvas.SetActive(true);
            // canvas.SetActive(GetMenu());
         }
-        // else{
-        //     canvas.SetActive(GetMenu());
-        // }
+        else {
+            istCanvas.SetActive(false);
+        }
          if(GetGribDown()){
             print("grib"+handType);
             //Debug.Log("ok");
         }
-        
     }
 }
