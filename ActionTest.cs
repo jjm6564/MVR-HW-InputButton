@@ -4,49 +4,69 @@ using UnityEngine;
 using Valve.VR;
 public class ActionTest : MonoBehaviour
 {
-    public Object leftController;
-    public SteamVR_Input_Sources handType;
+    //public Object leftController;
+    public SteamVR_Input_Sources leftHand;
     public SteamVR_Action_Boolean menu;
-    public SteamVR_Action_Boolean grab;
     public GameObject canvas;
     private GameObject istCanvas;
-    
     public GameObject HMD;
-    public GameObject cube;
+    //--------------------------------------------------------------
+    public GameObject rightHand;
+    public SteamVR_Action_Boolean grab;
+    public GameObject dot;
+    public LayerMask layerMask;
+    private RaycastHit hit;
+    private float maxDistance = 10f;
+    //=======================================================
 
-    public bool GetMenu(){
-        return menu.GetState(handType);
+    public bool GetMenu()
+    {
+        return menu.GetState(leftHand);
     }
-    public bool GetGribDown(){
-        return grab.GetStateDown(handType);
-    }
- 
+    // public bool GetGribDown()
+    // {
+    //     return grab.GetStateDown(leftHand);
+    // }
+    // void casting()
+    // {
+    //     if (grab.state==true)
+    //     {
+    //             Debug.Log("first");
+    //         Debug.DrawRay(rightHand.transform.position,rightHand.transform.forward*maxDistance,Color.red);
+    //         if(Physics.Raycast(rightHand.transform.position,transform.forward,out hit,maxDistance,layerMask)==true){
+    //             Debug.Log("boom");
+    //         }
+
+    //     }
+    // }
+
     void Awake()
     {
-        //Instantiate (canvas,new Vector3(0,0,3),Quaternion.Euler(-90f,0f,0f));
-        //Instantiate(canvas,new Vector3(0,0,2),canvas.transform.rotation).transform.parent = HMD.transform;
-      istCanvas = Instantiate(canvas,canvas.transform.localPosition,canvas.transform.rotation);
-      istCanvas.transform.parent = HMD.transform;
-      //Instantiate(canvas,canvas.transform.localPosition,canvas.transform.rotation).transform.parent = HMD.transform;
-
+        istCanvas = Instantiate(canvas);
+        istCanvas.transform.parent = HMD.transform;
+        istCanvas.layer = 3;
     }
+
     void Start()
     {
         istCanvas.SetActive(false);
-        cube.SetActive(false);
     }
     void Update()
     {
-        if(GetMenu()){
+        if (GetMenu())
+        {
+            //print("menu" + handType);
             istCanvas.SetActive(true);
-           // canvas.SetActive(GetMenu());
+            // canvas.SetActive(GetMenu());
         }
-        else {
+        else
+        {
             istCanvas.SetActive(false);
         }
-         if(GetGribDown()){
-            print("grib"+handType);
-            //Debug.Log("ok");
-        }
+        // if (GetGribDown())
+        // {
+        //     //print("grib"+handType);
+        //     // casting();
+        // }
     }
 }
