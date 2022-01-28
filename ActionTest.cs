@@ -4,11 +4,10 @@ using UnityEngine;
 using Valve.VR;
 public class ActionTest : MonoBehaviour
 {
-    //public Object leftController;
     public SteamVR_Input_Sources leftHand;
     public SteamVR_Action_Boolean menu;
     public GameObject canvas;
-    private GameObject istCanvas;
+    private static GameObject istCanvas;
     public GameObject HMD;
     //--------------------------------------------------------------
     public GameObject rightHand;
@@ -18,28 +17,10 @@ public class ActionTest : MonoBehaviour
     private RaycastHit hit;
     private float maxDistance = 10f;
     //=======================================================
-
     public bool GetMenu()
     {
         return menu.GetState(leftHand);
     }
-    // public bool GetGribDown()
-    // {
-    //     return grab.GetStateDown(leftHand);
-    // }
-    // void casting()
-    // {
-    //     if (grab.state==true)
-    //     {
-    //             Debug.Log("first");
-    //         Debug.DrawRay(rightHand.transform.position,rightHand.transform.forward*maxDistance,Color.red);
-    //         if(Physics.Raycast(rightHand.transform.position,transform.forward,out hit,maxDistance,layerMask)==true){
-    //             Debug.Log("boom");
-    //         }
-
-    //     }
-    // }
-
     void Awake()
     {
         istCanvas = Instantiate(canvas);
@@ -57,16 +38,10 @@ public class ActionTest : MonoBehaviour
         {
             //print("menu" + handType);
             istCanvas.SetActive(true);
-            // canvas.SetActive(GetMenu());
         }
         else
         {
             istCanvas.SetActive(false);
         }
-        // if (GetGribDown())
-        // {
-        //     //print("grib"+handType);
-        //     // casting();
-        // }
     }
 }
