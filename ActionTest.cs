@@ -12,7 +12,7 @@ public class ActionTest : MonoBehaviour
     //--------------------------------------------------------------
     public GameObject rightHand;
     public SteamVR_Action_Boolean grab;
-    public GameObject dot;
+    private GameObject dot;
     public LayerMask layerMask;
     private RaycastHit hit;
     private float maxDistance = 10f;
